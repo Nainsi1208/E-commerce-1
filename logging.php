@@ -10,8 +10,7 @@ if(isset($_POST['sub'])){
      if($exe = mysqli_fetch_array($query)){
         $_SESSION['name']= $exe['Name'];
         echo"<script>alert('user found')</script>";
-        header("location: index.php");
-     
+        header("location: index.php");  
       } else if ($axa = mysqli_fetch_array($qurry)){
         $_SESSION['name']= $axa['Name'];
         echo"<script>alert('user found')</script>";
