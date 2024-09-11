@@ -245,7 +245,7 @@
           </div>
           <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
             <div class="nav-wrapper position-relative end-0">
-              <ul class="nav nav-pills nav-fill p-1" role="tablist">
+              <!-- <ul class="nav nav-pills nav-fill p-1" role="tablist">
                 <li class="nav-item">
                   <a class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
                     <i class="ni ni-app"></i>
@@ -264,7 +264,7 @@
                     <span class="ms-2">Settings</span>
                   </a>
                 </li>
-              </ul>
+              </ul> -->
             </div>
           </div>
         </div>
@@ -349,7 +349,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
           <div class="card card-profile">
             <img src="./assets/img/bg-profile.jpg" alt="Image placeholder" class="card-img-top">
             <div class="row justify-content-center">
@@ -387,8 +387,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="text-center mt-4">
+              </div> -->
+              <!-- <div class="text-center mt-4">
                 <h5>
                   Mark Davis<span class="font-weight-light">, 35</span>
                 </h5>
@@ -405,7 +405,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <footer class="footer pt-3  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">

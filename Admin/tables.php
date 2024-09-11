@@ -427,14 +427,14 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
               <h6>Projects table</h6>
             </div>
-            <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
+            <div class="card-body px-0 pt-0 pb-2"> -->
+              <!-- <div class="table-responsive p-0">
                 <table class="table align-items-center justify-content-center mb-0">
                   <thead>
                     <tr>
@@ -477,8 +477,8 @@
                         <button class="btn btn-link text-secondary mb-0">
                           <i class="fa fa-ellipsis-v text-xs"></i>
                         </button>
-                      </td>
-                    </tr>
+                      </td> -->
+                    <!-- </tr>
                     <tr>
                       <td>
                         <div class="d-flex px-2">
@@ -650,7 +650,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <footer class="footer pt-3  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
