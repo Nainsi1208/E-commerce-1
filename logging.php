@@ -14,7 +14,7 @@ if(isset($_POST['sub'])){
       } else if ($axa = mysqli_fetch_array($qurry)){
         $_SESSION['name']= $axa['Name'];
         echo"<script>alert('user found')</script>";
-        header("location: dashboard.php");
+        header("location: admin/dashboard.php");
     }else {
         echo"<script>alert('user not found')</script>";
     }
