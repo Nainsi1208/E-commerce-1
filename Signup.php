@@ -1,6 +1,6 @@
 <?php
-$con = mysqli_connect("localhost","root","","e_commerce");
-$qury = mysqli_query($con, "select * from user");
+$con = mysqli_connect("localhost","root","","ecommerce_users");
+$qury = mysqli_query($con, "select * from users");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,45 +147,44 @@ $qury = mysqli_query($con, "select * from user");
 </style>
 <body>
 <?php
-    if(isset($_POST['Sub'])){
-      $fname=$_POST['first_Name'];
-      $lname=$_POST['last_Name'];
-      $email=$_POST['Email_id'];
+    if(isset($_POST['sub'])){
+      $name=$_POST['Name'];
+      $email=$_POST['Email'];
+      $num=$_POST['Number'];
       $pass=$_POST['Password'];
-      $cpass=$_POST['confrim_password'];
-       mysqli_query($con, "insert into user (first_Name,last_Name,Email_id,Password,confrim_password ) values('$fname','$lname','$email','$pass','$cpass')" );
+
+      $urname = substr($name, 0, 3);
+      $uremail = substr($email, 0, 5);
+      $urpass = substr($pass, 0, 2);
+      $urnum = substr($num, 0, 2);
+      $username = $urname . $uremail . $urpass . $urnum;
+
+       mysqli_query($con, " INSERT INTO users (Name,,Email,Number,Password,username ) values('$name','$email','$num','$pass','$username')" );
     }
     ?>
     <div class="signup-form">
 <form action="" class="form" method="POST" >
     <p class="title">Register </p>
     <p class="message">Signup now and get full access to our app. </p>
-        <div class="flex">
-        <label>
-            <input required="" name="first_Name" placeholder="" type="text" class="input">
-            <span>first_Name</span>
-        </label>
-
-        <label>
-            <input required=""  name="last_Name" placeholder="" type="text" class="input">
-            <span>last_Name</span>
-        </label>
-    </div>  
+        
+    <label>
+            <input required="" name="Name" placeholder="" type="text" class="input">
+            <span>Name</span>
+  </label>  
             
     <label>
-        <input required="" name="Email_id" placeholder="" type="email" class="input">
+        <input required="" name="Email" placeholder="" type="email" class="input">
         <span>Email_id</span>
     </label> 
-        
+    <label>
+            <input required="" name="Number" placeholder="" type="text" class="input">
+            <span>Number</span>
+  </label> 
     <label>
         <input required="" name="Password" placeholder="" type="password" class="input">
         <span>Password</span>
     </label>
-    <label>
-        <input required="" name="confrim_password" placeholder="" type="password" class="input">
-        <span>Confrim_password</span>
-    </label>
-    <button class="submit" name="Sub">Submit</button>
+        <button class="submit" name="sub">Submit</button>
     <p class="signin">Already have an acount ? <a href="logging.php">Login</a> </p>
 </form>
     </div>
