@@ -252,6 +252,10 @@
                     </tr>
                   </thead>
                   <tbody>
+                <?php $con = mysqli_connect("localhost","root","","user");
+                  $query = mysqli_query($con, "SELECT * FROM department right join users ON users.office = department.dept_id");
+                  while($exe = mysqli_fetch_array($query)){
+                     ?>
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
@@ -259,13 +263,13 @@
                             <img src="./assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                            <h6 class="mb-0 text-sm"><?php echo $exe['name']?></h6>
+                            <p class="text-xs text-secondary mb-0"><?php echo $exe['email']?></p>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
+                        <p class="text-xs font-weight-bold mb-0"><?php echo $exe['dept_name']?></p>
                         <p class="text-xs text-secondary mb-0">Organization</p>
                       </td>
                       <td class="align-middle text-center text-sm">
@@ -280,7 +284,10 @@
                         </a>
                       </td>
                     </tr>
-                    <tr>
+                    <?php
+                  }
+                    ?>
+                    <!-- <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
@@ -426,7 +433,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="row">
         <div class="col-12">
           <div class="card mb-4">

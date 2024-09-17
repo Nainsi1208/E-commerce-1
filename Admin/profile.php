@@ -263,7 +263,7 @@
                     <i class="ni ni-settings-gear-65"></i>
                     <span class="ms-2">Settings</span>
                   </a>
-                </li>
+                  </li>
               </ul> -->
             </div>
           </div>
@@ -272,7 +272,7 @@
     </div>
     <div class="container-fluid py-4">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div class="card">
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
