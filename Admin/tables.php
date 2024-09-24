@@ -16,6 +16,10 @@
 <html lang="en">
 
 <head>
+  <?php
+  session_start();
+  include('../connections.php');
+  ?>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
@@ -252,9 +256,26 @@
                     </tr>
                   </thead>
                   <tbody>
-                <?php $con = mysqli_connect("localhost","root","","user");
-                  $query = mysqli_query($con, "SELECT * FROM department right join users ON users.office = department.dept_id");
-                  while($exe = mysqli_fetch_array($query)){
+                <?php 
+ $user_arry = []; 
+ $query = mysqli_query($con, "SELECT * FROM department RIGHT JOIN users ON users.dept = department.dp_id");
+ 
+ while ($exe = mysqli_fetch_array($query)) {
+     $user_arry[] = $exe; 
+ }
+ 
+ $admin_arry = [];
+ $admin = mysqli_query($con, "SELECT * FROM department RIGHT JOIN admin ON admin.dept = department.dp_id");
+ 
+ while ($row = mysqli_fetch_array($admin)) {
+     $admin_arry[] = $row; 
+ }
+ 
+ $arry_mer = array_merge($user_arry, $admin_arry);
+ 
+ foreach ($arry_mer as $item) {
+     
+ 
                      ?>
                     <tr>
                       <td>
@@ -263,13 +284,13 @@
                             <img src="./assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><?php echo $exe['name']?></h6>
-                            <p class="text-xs text-secondary mb-0"><?php echo $exe['email']?></p>
+                            <h6 class="mb-0 text-sm"><?php echo $item['name']?></h6>
+                            <p class="text-xs text-secondary mb-0"><?php echo $item['email']?></p>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0"><?php echo $exe['dept_name']?></p>
+                        <p class="text-xs font-weight-bold mb-0"><?php echo $item['dp_name']?></p>
                         <p class="text-xs text-secondary mb-0">Organization</p>
                       </td>
                       <td class="align-middle text-center text-sm">

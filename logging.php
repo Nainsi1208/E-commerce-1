@@ -1,18 +1,22 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost","root","","e_commerce");
+include('connections.php');
 if(isset($_POST['sub'])){
     $email_id=$_POST['Email_id'];
     $pass=$_POST['Password'];
-    $qurry= mysqli_query($con, "select * from admin where Email_id = '$email_id' and Password = '$pass'");
-    $query= mysqli_query($con, "select * from user where Email_id = '$email_id' and Password = '$pass'");
+    $qurry= mysqli_query($con, "select * from admin where email = '$email_id' and password = '$pass'");
+    $query= mysqli_query($con, "select * from users where email = '$email_id' and password = '$pass'");
     if($query || $qurry){
      if($exe = mysqli_fetch_array($query)){
-        $_SESSION['name']= $exe['Name'];
+      foreach(['id','name','email','mobile','password','profile_img','dept','username'] as $key){
+        $_SESSION[$key] = $exe[$key];
+      }
         echo"<script>alert('user found')</script>";
         header("location: index.php");  
       } else if ($axa = mysqli_fetch_array($qurry)){
-        $_SESSION['name']= $axa['Name'];
+        foreach(['id','name','email','mobile','password','profile_img','dept','username'] as $key){
+          $_SESSION[$key] = $axa[$key];
+        }
         echo"<script>alert('user found')</script>";
         header("location: admin/dashboard.php");
     }else {

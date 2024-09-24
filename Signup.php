@@ -159,7 +159,7 @@ $qury = mysqli_query($con, "select * from users");
       $urnum = substr($num, 0, 2);
       $username = $urname . $uremail . $urpass . $urnum;
 
-       mysqli_query($con, " INSERT INTO users (Name,,Email,Number,Password,username ) values('$name','$email','$num','$pass','$username')" );
+       mysqli_query($con, " insert into users (name,email,mobile,password,username ) values('$name','$email','$num','$pass','$username')" );
     }
     ?>
     <div class="signup-form">
