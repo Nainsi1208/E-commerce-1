@@ -16,6 +16,9 @@ body {
   color: #6a6a6a;
   font-size: 14px;
   background-color: #eff2f1; }
+  #con{
+    margin-top: 15rem !important;
+  }
 
 a {
   text-decoration: none;

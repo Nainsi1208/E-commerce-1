@@ -33,6 +33,7 @@
   <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="./assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body class="">
@@ -97,7 +98,7 @@
         </div>
       </div>
     </div> -->
-    <div class="container">
+    <div class="container" id="con">
       <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
         <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
           <div class="card z-index-0">

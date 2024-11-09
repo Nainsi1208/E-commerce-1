@@ -166,7 +166,7 @@ if(isset($_POST['sub'])){
 <button id="button" name="sub">Submit</button>
     <a class="forgotLink" href="#">Forgot your password?</a>
 </form>
-<!-- <a href="./index.html"></a> -->
+<!-- <a href="./index.php"></a> -->
 
     <!-- <script src="scripts.js"></script> -->
 </body>
