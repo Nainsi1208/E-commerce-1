@@ -3,38 +3,57 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'PHPMailer/src/Exception.php';
-// require 'PHPMailer/src/PHPMailer.php';
-// require 'PHPMailer/src/SMTP.php';
-// Check if email is submitted
-if (isset($_POST['send'])) {
-    // Get the email address
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+session_start();
+$mail = new PHPMailer(true);
+
+
+if(isset($_POST['send'])){
+    $name = $_POST['name'];
     $email = $_POST['email'];
+    $sub = $_POST['sub'];
+    $msg = $_POST['msg'];
 
-    // Generate a random OTP (6 digits)
-    $otp = rand(100000, 999999);
-
-    // Store the OTP in session for later verification
-    session_start();
-    $_SESSION['otp'] = $otp;
-    $_SESSION['email'] = $email;
-
-    // Subject and message for the OTP email
-    $subject = "Your OTP Code";
-    $message = "Your OTP code is: $otp\n\nPlease use this code to complete your verification.";
-    $headers = "From: no-reply@gmail.com";
-
-    // Send the OTP to the provided email address
-    if (mail($email, $subject, $message, $headers)) {
-        echo "OTP has been sent to $email.<br>";
-        echo "<a href='verify_otp.php'>Click here to verify OTP</a>";
-    } else {
-        echo "Failed to send OTP. Please try again later.";
+    try {
+        //Server settings
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'nainsikumari646561@gmail.com';                     //SMTP username
+        $mail->Password   = 'awxruocfefoixzuv';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+        $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
+    
+        //Recipients
+        $mail->setFrom('nainsikumari646561@gmail.com', 'Nainsi');
+        $mail->addAddress($email, $name);     //Add a recipient
+        // $mail->addAddress('ellen@example.com');               //Name is optional
+        // $mail->addReplyTo('info@example.com', 'Information');
+        // $mail->addCC('cc@example.com');
+        // $mail->addBCC('bcc@example.com');
+    
+        //Attachments
+        // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+    
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = $sub;
+        $mail->Body    = $msg;
+        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    
+        $mail->send();
+        echo 'Message has been sent';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
-} else {
-    echo "Email is required.";
 }
-    ?>
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +65,7 @@ if (isset($_POST['send'])) {
     <form action="" method="POST">
         <input type="text" name="name" placeholder="Name">
         <input type="email" name="email" placeholder="Email">
-        <!-- <textarea name="sub" id=""></textarea> -->
+        <textarea name="sub" id=""></textarea>
         <textarea name="msg" id=""></textarea>
         <input type="submit" value="Submit" name="send">
     </form>

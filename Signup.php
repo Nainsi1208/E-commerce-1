@@ -1,6 +1,15 @@
 <?php
-$con = mysqli_connect("localhost","root","","ecommerce_users");
-$qury = mysqli_query($con, "select * from users");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+session_start();
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+$mail = new PHPMailer(true);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,9 +20,6 @@ $qury = mysqli_query($con, "select * from users");
     <link rel="stylesheet" href="styles.css"> 
 </head>
 <style>
-  .signup-form{
-   
-  }
 .form {
   display: flex;
   flex-direction: column;
@@ -147,20 +153,250 @@ $qury = mysqli_query($con, "select * from users");
 </style>
 <body>
 <?php
-    if(isset($_POST['sub'])){
-      $name=$_POST['Name'];
-      $email=$_POST['Email'];
-      $num=$_POST['Number'];
-      $pass=$_POST['Password'];
-
+$opt = rand(1000, 9999); 
+$_SESSION['otp'] = $opt;
+     if (isset($_POST['sub'])) {
+      $name = $_POST['Name'];
+      $email = $_POST['Email'];
+      $num = $_POST['Number'];
+      $pass = $_POST['Password'];
+  
       $urname = substr($name, 0, 3);
       $uremail = substr($email, 0, 5);
       $urpass = substr($pass, 0, 2);
       $urnum = substr($num, 0, 2);
       $username = $urname . $uremail . $urpass . $urnum;
+      
+      $_SESSION['s_name'] = $name;
+      $_SESSION['s_email'] = $email;
+      $_SESSION['s_mobile'] = $num;
+      $_SESSION['s_pass'] = $pass;
+      $_SESSION['s_urn'] = $username;
+      header("location: verification-otp.php");
 
-       mysqli_query($con, " insert into users (name,email,mobile,password,username ) values('$name','$email','$num','$pass','$username')" );
+      try {
+          //Server settings
+           //Enable verbose debug output
+          $mail->isSMTP(); //Send using SMTP
+          $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+          $mail->SMTPAuth = true; //Enable SMTP authentication
+          $mail->Username = 'nainsikumari646561@gmail.com'; //SMTP username
+          $mail->Password = 'epgkagbqpdqkoyqz'; //SMTP password
+          $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //Enable implicit TLS encryption
+          $mail->Port = 587; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+  
+          //Recipients
+          $mail->setFrom('nainsikumari646561@gmail.com', 'Nainsi'); // Corrected line
+          $mail->addAddress($email, $name); //Add a recipient
+     //Name is optional
+  
+          //Content
+          $mail->isHTML(true); //Set email format to HTML
+          $mail->Subject = 'Hello LUXE Shop user- Verification OTP';
+          $mail->Body = ' <div
+      style="
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 45px 30px 60px;
+        background: #f4f7ff;
+        background-image: url(https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661497957196_595865/email-template-background-banner);
+        background-repeat: no-repeat;
+        background-size: 800px 452px;
+        background-position: top center;
+        font-size: 14px;
+        color: #434343;
+      "
+    >
+      <header>
+        <table style="width: 100%;">
+          <tbody>
+            <tr style="height: 0;">
+              <td>
+                <img
+                  alt=""
+                  src="https://templatemo.com/tm-571-hexashop"
+                  height="30px"
+                />
+              </td>
+              <td style="text-align: right;">
+                <span
+                  style="font-size: 16px; line-height: 30px; color: #ffffff;"
+                  >12 Nov, 2021</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </header>
+
+      <main>
+        <div
+          style="
+            margin: 0;
+            margin-top: 70px;
+            padding: 92px 30px 115px;
+            background: #ffffff;
+            border-radius: 30px;
+            text-align: center;
+          "
+        >
+          <div style="width: 100%; max-width: 489px; margin: 0 auto;">
+            <h1
+              style="
+                margin: 0;
+                font-size: 24px;
+                font-weight: 500;
+                color: #1f1f1f;
+              "
+            >
+              Your OTP
+            </h1>
+            <p
+              style="
+                margin: 0;
+                margin-top: 17px;
+                font-size: 16px;
+                font-weight: 500;
+              "
+            >
+              Hey Tomy,
+            </p>
+            <p
+              style="
+                margin: 0;
+                margin-top: 17px;
+                font-weight: 500;
+                letter-spacing: 0.56px;
+              "
+            >
+              Thank you for choosing HexaShop. Use the following OTP
+              to complete the procedure to change your email address. OTP is
+              valid for
+              <span style="font-weight: 600; color: #1f1f1f;">5 minutes</span>.
+              Do not share this code with others, including Archisketch
+              employees.
+            </p>
+            <p
+              style="
+                margin: 0;
+                margin-top: 60px;
+                font-size: 40px;
+                font-weight: 600;
+                letter-spacing: 25px;
+                color: #ba3d4f;
+              "
+            >'.$_SESSION['otp'].'</p>
+          </div>
+        </div>
+
+        <p
+          style="
+            max-width: 400px;
+            margin: 0 auto;
+            margin-top: 90px;
+            text-align: center;
+            font-weight: 500;
+            color: #8c8c8c;
+          "
+        >
+          Need help? Ask at
+          <a
+            href="mailto:archisketch@gmail.com"
+            style="color: #499fb6; text-decoration: none;"
+            >archisketch@gmail.com</a
+          >
+          or visit our
+          <a
+            href=""
+            target="_blank"
+            style="color: #499fb6; text-decoration: none;"
+            >Help Center</a
+          >
+        </p>
+      </main>
+
+      <footer
+        style="
+          width: 100%;
+          max-width: 490px;
+          margin: 20px auto 0;
+          text-align: center;
+          border-top: 1px solid #e6ebf1;
+        "
+      >
+        <p
+          style="
+            margin: 0;
+            margin-top: 40px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #434343;
+          "
+        >
+          Archisketch Company
+        </p>
+        <p style="margin: 0; margin-top: 8px; color: #434343;">
+          Address 540, City, State.
+        </p>
+        <div style="margin: 0; margin-top: 16px;">
+          <a href="" target="_blank" style="display: inline-block;">
+            <img
+              width="36px"
+              alt="Facebook"
+              src="https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661502815169_682499/email-template-icon-facebook"
+            />
+          </a>
+          <a
+            href=""
+            target="_blank"
+            style="display: inline-block; margin-left: 8px;"
+          >
+            <img
+              width="36px"
+              alt="Instagram"
+              src="https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661504218208_684135/email-template-icon-instagram"
+          /></a>
+          <a
+            href=""
+            target="_blank"
+            style="display: inline-block; margin-left: 8px;"
+          >
+            <img
+              width="36px"
+              alt="Twitter"
+              src="https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661503043040_372004/email-template-icon-twitter"
+            />
+          </a>
+          <a
+            href=""
+            target="_blank"
+            style="display: inline-block; margin-left: 8px;"
+          >
+            <img
+              width="36px"
+              alt="Youtube"
+              src="https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661503195931_210869/email-template-icon-youtube"
+          /></a>
+        </div>
+        <p style="margin: 0; margin-top: 16px; color: #434343;">
+          Copyright © 2022 Company. All rights reserved.
+        </p>
+      </footer>
+    </div>';
+   
+        $mail->AltBody = 'Your OTP is '.$_SESSION['otp'];
+          $mail->send();
+          echo 'Message has been sent';
+      } catch (Exception $e) {
+          echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+      }
+      
     }
+    //  mysqli_query($con, " insert into users (name,email,mobile,password,username ) values('$name','$email','$num','$pass','$username')" );
+  
+    
+    
+    // }
     ?>
     <div class="signup-form">
 <form action="" class="form" method="POST" >
