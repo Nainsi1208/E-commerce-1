@@ -16,9 +16,16 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 		<link href="css/tiny-slider.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
+		<!-- <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script> -->
+		<title>LUXE </title>
 	</head>
-
+    <style>
+     .box{
+		width: 50px;
+		height: 0px;
+		background: black;
+	 }
+	</style>
 	<body>
 
 		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
@@ -43,8 +50,9 @@
 					</ul>
 
 					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-						<li><a class="nav-link d-flex align-items-center gap-2.
-						" href="#"><img src="images/user.svg"><?php echo $_SESSION['name'];?></a></li>
+						<li class="name"><a class="nav-link d-flex align-items-center gap-2.
+						" href="#"><img src="images/user.svg"><?php  echo $_SESSION['name'];?></a></li>
+						<div class="box"></div>
 						<li><a class="nav-link" href="cart.php"><img src="images/cart.svg"></a></li>
 					</ul>
 				</div>
@@ -502,7 +510,6 @@
 
 					</div>
 				</div>
-
 			</div>
 		</footer>
 		
@@ -512,6 +519,16 @@
 		header('location:logging.php');
 	}
 		?>
+		<script>
+			$(documemt).ready(function(){
+            $('.name').click(function(){
+				$('.box').animate({
+					height: "200px"
+				})
+				$('.box').slideToggle()
+			})
+			})
+		</script>
 		<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/tiny-slider.js"></script>
 		<script src="js/custom.js"></script>

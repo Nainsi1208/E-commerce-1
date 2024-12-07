@@ -16,10 +16,15 @@ $mail = new PHPMailer(true);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" 
+    crossorigin="anonymous"></script>
     <title>Sign Up</title>
     <link rel="stylesheet" href="styles.css"> 
 </head>
 <style>
+  *{
+    outline: none;
+  }
 .form {
   display: flex;
   flex-direction: column;
@@ -424,5 +429,24 @@ $_SESSION['otp'] = $opt;
     <p class="signin">Already have an acount ? <a href="logging.php">Login</a> </p>
 </form>
     </div>
+    <script>
+     $(document).ready(function(){
+            // $(".inp").focus(function(){
+            //     $(this).css("border","1px solid green")
+            // })
+            // $(".inp").blur(function(){
+            //     $(this).css("border","1px solid red")
+            // })
+            $('.input').keydown(function(){
+                if($(this).val()){
+                    $(this).css("border","1px solid green")
+                }else{
+                    $(this).css("border","1px solid red")
+                }
+            })
+        });
+
+          
+    </script>
 </body>
 </html>  
