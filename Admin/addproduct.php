@@ -311,7 +311,7 @@ if (isset($_POST['sub'])) {
     </div>
     <?php
     if(isset($_POST['submit'])){
-        $select = $_POST['img'];
+        $select = $_POST['prod'];
         if(isset($_FILES['fs'])){
             $img = $_FILES['fs']['name'];
             $img_tmp =$_FILES['fs']['tmp_name'];
@@ -333,7 +333,7 @@ if (isset($_POST['sub'])) {
                     }else{
                         echo'no';
                     }
-            mysqli_query($prdt,"INSERT INTO product_imgs  _id,prdt_img1,prdt_img2,prdt_img3) values ($select,'$img','$imgs','$imges') ");
+            mysqli_query($prdt,"INSERT INTO items (pr_id,pr_img1,pr_img2,pr_img3) values ('$select','$img','$imgs','$imges') ");
     }else{
         echo'no';
         
@@ -344,9 +344,9 @@ if (isset($_POST['sub'])) {
     <input type="file" name='fs'>
     <input type="file" name='ls'>
     <input type="file" name='sec'>
-    <button type="submit" name="submit">submit</button>
-    </form>
-        <?php 
+    <select name="prod">
+      <option value="">Select Product</option>
+      <?php 
         $product = mysqli_query($prdt,'SELECT * FROM product_items');
         while($row = mysqli_fetch_array($product)){
         ?>
@@ -354,6 +354,10 @@ if (isset($_POST['sub'])) {
             <?php echo $row['product_name'];?>
         </option>
        <?php } ?>
+    </select>
+    <button type="submit" name="submit">submit</button>
+    </form>
+       
   </main>
   <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">

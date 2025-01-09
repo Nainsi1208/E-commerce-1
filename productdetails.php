@@ -129,7 +129,7 @@
     // SELECT * FROM products_items WHERE id = $product_id;
     $sql = "SELECT * FROM product_items WHERE id = $product_id";
     $result = mysqli_query($prdt, $sql);
-    if($row = mysqli_fetch_assoc($result)){    
+    if($row = mysqli_fetch_assoc($result)){  
   ?>
     <section class="py-5">
       <div class="container">
@@ -141,13 +141,13 @@
                   <img src="images/<?php echo $row['product_img']?>" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                <img src="images/<?php echo $row['pr_img1']?>" />  
                 </div>
                 <div class="swiper-slide">
-                  <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                <img src="images/<?php echo $row['pr_img2']?>" />                
                 </div>
                 <div class="swiper-slide">
-                  <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                <img src="images/<?php echo $row['pr_img3']?>" />
                 </div>
               </div>
               <div class="swiper-button-next"></div>
@@ -159,13 +159,13 @@
                   <img src="images/<?php echo $row['product_img']?>" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                <img src="images/<?php echo $row['pr_img1']?>" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                <img src="images/<?php echo $row['pr_img2']?>" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                <img src="images/<?php echo $row['pr_img3']?>" />
                 </div>
               </div>
             </div>

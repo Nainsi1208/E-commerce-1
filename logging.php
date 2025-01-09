@@ -4,7 +4,7 @@ include('connections.php');
 if(isset($_POST['sub'])){
     $email_id=$_POST['Email_id'];
     $pass=$_POST['Password'];
-    // $qurry= mysqli_query($con, "select * from admin where email = '$email_id' and password = '$pass'");
+    $qurry= mysqli_query($con, "select * from admin where email = '$email_id' and password = '$pass'");
     $query= mysqli_query($con, "select * from users where email = '$email_id' and password = '$pass'");
     if($query || $qurry){
      if($exe = mysqli_fetch_array($query)){
